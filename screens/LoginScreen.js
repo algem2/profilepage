@@ -1,16 +1,28 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    // Logic for handling login
-    console.log('Email:', email, 'Password:', password);
+    // Basic validation
+    if (!email || !password) {
+      Alert.alert('Error', 'Please enter both email and password');
+      return;
+    }
+
+    // Simple mock authentication
+    const validEmail = 'test@example.com';
+    const validPassword = '123456';
+
+    if (email === validEmail && password === validPassword) {
+      Alert.alert('Success', 'Login successful!');
+      navigation.navigate('ProfileScreen', { userEmail: email });
+    } else {
+      Alert.alert('Error', 'Invalid email or password');
+    }
   };
-
-
 
   return (
     <View style={styles.container}>
@@ -18,6 +30,8 @@ const LoginScreen = ({ navigation }) => {
       <TextInput
         style={styles.input}
         placeholder="Email"
+        keyboardType="email-address"
+        autoCapitalize="none"
         value={email}
         onChangeText={setEmail}
       />
@@ -31,7 +45,7 @@ const LoginScreen = ({ navigation }) => {
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+      <TouchableOpacity onPress={() => navigation.navigate('RegisterScreen')}>
         <Text style={styles.linkText}>Don't have an account? Register</Text>
       </TouchableOpacity>
     </View>

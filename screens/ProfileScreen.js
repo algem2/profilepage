@@ -12,6 +12,10 @@ const ProfileScreen = ({ navigation }) => {
     navigation.navigate('LoginScreen');
   };
 
+  const handleTodoList = () => {
+    navigation.navigate('DashboardScreen');
+  };
+
   const toggleDashboard = () => {
     setIsDashboardVisible(!isDashboardVisible);
   };
@@ -40,7 +44,7 @@ const ProfileScreen = ({ navigation }) => {
 
       <View style={styles.profileHeader}>
         <Image
-          source={require('./assets/images/venom.jpg')}
+          source={require('../assets/images/venom.jpg')}
           style={styles.image}
         />
         <View style={styles.datejoined}>
@@ -62,6 +66,12 @@ const ProfileScreen = ({ navigation }) => {
           onPress={handleLogout}
         >
           <Text style={styles.buttonText}>Logout</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.button, styles.todoButton]}
+          onPress={handleTodoList}
+        >
+          <Text style={styles.buttonText}>Todo List</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -166,6 +176,9 @@ const styles = StyleSheet.create({
   },
   logoutButton: {
     backgroundColor: '#731728',
+  },
+  todoButton: {
+    backgroundColor: '#343438',
   },
   buttonText: {
     color: '#fff',
